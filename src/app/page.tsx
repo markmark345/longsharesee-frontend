@@ -1,3 +1,12 @@
-export default function Home() {
-	return <h1 className="text-blue-600">Hello!</h1>
+import { useHome } from '@/hooks'
+
+const Home = () => {
+	const { onSubmit } = useHome()
+	return (
+		<button onClick={() => onSubmit({ email: 'xxx', password: 'xxx' })}>
+			Button
+		</button>
+	)
 }
+
+export default Home
