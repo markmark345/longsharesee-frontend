@@ -1,5 +1,3 @@
-'use client'
-
 import noop, { noopPromise } from '@/utils/noop'
 import {
 	FC,
@@ -58,6 +56,7 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 
 	const logIn = useCallback(
 		async (payload: { email: string; password: string }) => {
+			console.log('After: ', state.isLoggedIn)
 			if (payload.email && payload.password) {
 				setState((prevState) => ({
 					...prevState,
@@ -65,7 +64,7 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 				}))
 			}
 		},
-		[],
+		[state.isLoggedIn],
 	)
 
 	const logOut = useCallback(() => {
