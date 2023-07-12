@@ -18,12 +18,13 @@ interface IUserState {
 	isLoggedOut: boolean
 }
 
-interface IApiActions {
-	logOut: () => void
+interface IAsyncActions {
+	logIn: () => Promise<void>
+	logOut: () => Promise<void>
 }
 
-interface IAsyncActions {
-	logIn: (payload: { email: string; password: string }) => Promise<void>
+interface IUserApi {
+	asyncActions: IAsyncActions
 }
 
 const initialState: IUserState = {
@@ -31,17 +32,10 @@ const initialState: IUserState = {
 	isLoggedOut: false,
 }
 
-interface IUserApi {
-	actions: IApiActions
-	asyncActions: IAsyncActions
-}
-
 const initialApi: IUserApi = {
-	actions: {
-		logOut: noop,
-	},
 	asyncActions: {
 		logIn: noopPromise,
+		logOut: noopPromise,
 	},
 }
 
@@ -77,11 +71,9 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 
 	const api = useMemo(() => {
 		return {
-			actions: {
-				logOut,
-			},
 			asyncActions: {
 				logIn,
+				logOut,
 			},
 		}
 	}, [logIn, logOut])

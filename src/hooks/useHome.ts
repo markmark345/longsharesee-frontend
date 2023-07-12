@@ -7,10 +7,8 @@ export const useHome = () => {
 	const { logIn } = api.asyncActions
 
 	const onSubmit = useCallback(
-		async ({ email, password }: { email: string; password: string }) => {
-			await logIn({ email, password })
-		},
-		[logIn],
+		async ({ email, password }: { email: string; password: string }) => {},
+		[],
 	)
 
 	return {
