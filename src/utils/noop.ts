@@ -1,5 +1,3 @@
-const noop = (value?: any) => undefined
+export const noop = (_value?: any) => undefined
 
-export const noopPromise = async (value?: any) => undefined
-
-export default noop
+export const noopPromise = async (_value?: any) => undefined

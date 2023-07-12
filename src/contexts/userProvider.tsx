@@ -1,7 +1,8 @@
-import noop, { noopPromise } from '@/utils/noop'
+'use client'
+
+import { noopPromise, setCookie } from '@/utils'
 import {
 	FC,
-	ReactElement,
 	createContext,
 	useCallback,
 	useContext,
@@ -50,7 +51,8 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 
 	const logIn = useCallback(
 		async (payload: { email: string; password: string }) => {
-			console.log(payload.email)
+			// console.log('ssss', payload.email)
+			setCookie('email', payload.email, true)
 		},
 		[],
 	)
