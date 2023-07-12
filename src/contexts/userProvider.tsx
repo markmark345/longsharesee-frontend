@@ -19,7 +19,7 @@ interface IUserState {
 }
 
 interface IAsyncActions {
-	logIn: () => Promise<void>
+	logIn: (payload: { email: string; password: string }) => Promise<void>
 	logOut: () => Promise<void>
 }
 
@@ -50,17 +50,11 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 
 	const logIn = useCallback(
 		async (payload: { email: string; password: string }) => {
-			console.log('After: ', state.isLoggedIn)
-			if (payload.email && payload.password) {
-				setState((prevState) => ({
-					...prevState,
-					isLoggedIn: true,
-				}))
-			}
+			console.log(payload.email)
 		},
-		[state.isLoggedIn],
+		[],
 	)
-
+	//payload: { email: string; password: string }
 	const logOut = useCallback(() => {
 		setState((prevState) => ({
 			...prevState,
@@ -84,7 +78,7 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 				...state,
 			},
 			api,
-		] as [IUserState, IUserApi]
+		] as unknown as [IUserState, IUserApi]
 	}, [api, state])
 
 	return (

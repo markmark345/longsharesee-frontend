@@ -1,15 +1,12 @@
-import { useUserContext } from '@/contexts'
-import { useCallback, useContext } from 'react'
+import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
 
 export const useHome = () => {
-	const [state, api] = useUserContext()
-	// const {state, api} = useContext(UserContextProvider)
-	const { logIn } = api.asyncActions
+	const router = useRouter()
 
-	const onSubmit = useCallback(
-		async ({ email, password }: { email: string; password: string }) => {},
-		[],
-	)
+	const onSubmit = useCallback(() => {
+		router.push('/login')
+	}, [router])
 
 	return {
 		onSubmit,
