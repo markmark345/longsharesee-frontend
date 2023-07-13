@@ -7,6 +7,8 @@ const Home = () => {
 	return (
 		<>
 			<button onClick={onSubmit}>Button</button>
+			<h1>Hiiiiiii woaas</h1>
+			<h1>กกฟหไไไกไกไสฟสฟย ฟาหฟ</h1>
 		</>
 	)
 }
