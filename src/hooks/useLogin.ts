@@ -9,7 +9,12 @@ interface ILoginForm {
 
 export const useLogin = () => {
 	const [state, api] = useUserContext()
-	const { register, handleSubmit, watch } = useForm<ILoginForm>()
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm<ILoginForm>()
 	const { logIn } = api.asyncActions
 
 	const onSubmit = useCallback(async () => {
@@ -23,5 +28,6 @@ export const useLogin = () => {
 		onSubmit,
 		register,
 		handleSubmit,
+		errors,
 	}
 }
