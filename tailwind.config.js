@@ -6,6 +6,11 @@ module.exports = {
 		'./app/**/*.{ts,tsx}',
 		'./src/**/*.{ts,tsx}',
 	],
-	theme: {},
+	theme: {
+		fontFamily: {
+			Inter: ['Inter Thin'],
+			IBMPlexSansThai: ['IBM Plex Sans Thai'],
+		},
+	},
 	plugins: [require('tailwindcss-animate')],
 }
