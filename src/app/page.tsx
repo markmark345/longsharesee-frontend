@@ -6,9 +6,7 @@ const Home = () => {
 	const { onSubmit } = useHome()
 	return (
 		<>
-			<button onClick={onSubmit}>Button</button>
-			<h1>Hiiiiiii woaas</h1>
-			<h1>กกฟหไไไกไกไสฟสฟย ฟาหฟ</h1>
+			<button onClick={onSubmit}>Button go to login</button>
 		</>
 	)
 }
