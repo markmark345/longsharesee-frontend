@@ -1,6 +1,7 @@
 'use client'
 
 import { useLogin } from '@/hooks'
+import { useInput } from '@/hooks/components/useInput'
 import dynamic from 'next/dynamic'
 
 const Input = dynamic(() =>
@@ -9,19 +10,22 @@ const Input = dynamic(() =>
 
 const Login = () => {
 	const { register, handleSubmit, onSubmit, errors } = useLogin()
-
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				id={'email'}
-				className=" mx-5"
-				{...register('email', { required: true })}
+				className="m-4 p-[0.5rem] border-1 font-medium text-black"
+				register={register}
+				placeholder='Please enter Username'
+				
 			/>
 			{errors.email && <p className=" text-red-500">First name is required</p>}
 
-			<input
-				{...register('password')}
-				className=" bg-sky-700 hover:bg-sky-800 px-4 py-2 text-white sm:px-8 sm:py-3"
+			<Input
+				id={'password'}
+				register={register}
+				className="m-4 p-[0.5rem] border-1 font-medium text-black"
+				placeholder='Please enter Password'
 			/>
 			<button type="submit">submit</button>
 		</form>

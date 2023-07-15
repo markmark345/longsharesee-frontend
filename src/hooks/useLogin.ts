@@ -2,7 +2,7 @@ import { useUserContext } from '@/contexts'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
-interface ILoginForm {
+export interface ILoginForm {
 	email: string
 	password: string
 }
