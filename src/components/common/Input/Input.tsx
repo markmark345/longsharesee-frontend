@@ -1,10 +1,9 @@
-import { mergeClasses } from '@/utils'
 import classnames from 'classnames'
 import { FC, ReactNode } from 'react'
 
 export interface IInput {
 	id: string
-	placeholder: string
+	placeholder?: string
 	className?: string
 	type?: string
 	disabled?: boolean
@@ -22,19 +21,27 @@ const Input: FC<IInput> = (props) => {
 		id,
 		placeholder,
 		type,
+		disabled,
+		readOnly,
+		prefix,
+		suffix,
 		className: classNameProps,
 		...otherProps
 	} = props
 
+	console.log(disabled)
 	return (
 		<input
-			placeholder={placeholder}
-			prefix={'hello'}
+			placeholder={placeholder ? placeholder : undefined}
 			type={type}
+			disabled={disabled}
+			readOnly={readOnly}
 			className={classnames(
 				classNameProps,
-				`rounded-md border border-black-20 p-[0.3rem] hover:border-blue-primary focus:shadow-sm focus:shadow-indigo-500/40 focus:outline-none`,
+				`focus:ring-opacity-1 rounded-md border border-black-20 p-[0.3rem] hover:border-blue-primary focus:outline-none focus:ring-1 focus:ring-blue-primary `,
 			)}
+			
+			{...otherProps}
 		/>
 	)
 }

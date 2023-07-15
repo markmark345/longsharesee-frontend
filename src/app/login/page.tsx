@@ -1,7 +1,11 @@
 'use client'
 
-import { Input } from '@/components/common'
 import { useLogin } from '@/hooks'
+import dynamic from 'next/dynamic'
+
+const Input = dynamic(() =>
+	import('@/components/common').then((mod) => mod.Input),
+)
 
 const Login = () => {
 	const { register, handleSubmit, onSubmit, errors } = useLogin()
@@ -10,7 +14,7 @@ const Login = () => {
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				id={'email'}
-				placeholder={'email'}
+				className=" mx-5"
 				{...register('email', { required: true })}
 			/>
 			{errors.email && <p className=" text-red-500">First name is required</p>}

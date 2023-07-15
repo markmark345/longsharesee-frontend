@@ -9,7 +9,7 @@ module.exports = {
 	theme: {
 		colors: {
 			'red-primary': '#e28989',
-			'blue-primary': '#16c8f7',
+			'blue-primary': '#1677ff',
 			'yellow-primary': '#f9bd38',
 			'deepSea-10': '#3cc0be',
 			'deepSea-20': '#418ba6',
