@@ -1,11 +1,19 @@
-import { ChangeEvent, useState, useEffect } from 'react'
+import { ChangeEvent, useState, useCallback } from 'react'
 
-export const useInput = (initialValue = '') => {
-    const [value, setValue] = useState(initialValue);
+interface IUseInput {
+    defaultValue?: string;
+}
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
-    };
+export const useInput = ({defaultValue = ''}: IUseInput) => {
+    const [value, setValue] = useState(defaultValue);
+
+    /**
+     * 
+     * @param event Input events 
+     */
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    }, []);
 
     return { value, onChange: handleChange };
 }

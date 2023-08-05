@@ -54,8 +54,10 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 			// console.log('ssss', payload.email)
 			console.log("Crdentials: Email: ", payload.email);
 			console.log("Crdentials: Password: ", payload.password);
+			console.log(await (await fetch("https://gorest.co.in/public/v2/todos")).json())
 			
 			setCookie('email', payload.email, true)
+			window.location.href = '/account'
 		},
 		[],
 	)

@@ -11,6 +11,7 @@ export const useLogin = () => {
 	const [state, api] = useUserContext()
 	const {
 		register,
+		reset,
 		handleSubmit,
 		watch,
 		formState: { errors },
@@ -27,6 +28,7 @@ export const useLogin = () => {
 	return {
 		onSubmit,
 		register,
+		reset,
 		handleSubmit,
 		errors,
 	}

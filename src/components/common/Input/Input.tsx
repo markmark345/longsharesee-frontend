@@ -1,9 +1,11 @@
 import { useInput } from '@/hooks/components/useInput';
 import classnames from 'classnames'
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useEffect } from 'react'
+import { UseFormRegister} from 'react-hook-form';
 
 export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string,
+	name: string,
 	placeholder?: string
 	className?: string
 	type?: string
@@ -13,7 +15,8 @@ export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
 	hasSuffix?: boolean
 	classes?: object
 	label?: ReactNode
-	register: any
+	defaultValue?: string;
+	register: UseFormRegister<any>
 	onChange?: (...event: any[]) => void
 	onBlur?: (...event: any[]) => void
 }
@@ -21,6 +24,7 @@ export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input: FC<IInput> = (props) => {
 	const {
 		id,
+		name,
 		placeholder,
 		type,
 		disabled,
@@ -28,42 +32,34 @@ const Input: FC<IInput> = (props) => {
 		hasPrefix,
 		hasSuffix,
 		className: classNameProps,
+		defaultValue,
 		register,
 		...otherProps
 	} = props
 
-	const { value, onChange } = useInput();
+	const { value, onChange } = useInput({defaultValue});
+
+	useEffect(() => {
+		register(id, { value: value });
+	}, [id, value, register]);
 
 	return (
 		<input
 			id={id}
-			placeholder={placeholder ? placeholder : undefined}
 			type={type}
+			placeholder={placeholder ? placeholder : undefined}
 			value={value}
-			disabled={disabled}
-			readOnly={readOnly}
 			className={classnames(
 				classNameProps,
 				`focus:ring-opacity-1 rounded-md border border-black-20 p-[0.3rem] hover:border-blue-primary focus:outline-none focus:ring-1 focus:ring-blue-primary `,
 			)}
 			{...register(id, { required: true })}
+			name={name}
 			onChange={onChange}
 			{...otherProps}
 		/>
+		
 	)
 }
 
 export { Input }
-
-
-// ref
-// export interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-// 	id: string;
-// 	className?: string;
-// 	register: any;
-// }
-
-// const Input: React.FC<IInputProps> = ({ id, className, register, ...otherProps }) => {
-// 	const { value, onChange } = useInput();
-// 	return <input id={id} className={className} value={value} {...register(id)} onChange={onChange} {...otherProps} />;
-// };

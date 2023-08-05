@@ -1,7 +1,6 @@
 'use client'
 
 import { useLogin } from '@/hooks'
-import { useInput } from '@/hooks/components/useInput'
 import dynamic from 'next/dynamic'
 
 const Input = dynamic(() =>
@@ -9,25 +8,32 @@ const Input = dynamic(() =>
 )
 
 const Login = () => {
-	const { register, handleSubmit, onSubmit, errors } = useLogin()
+	const { register, handleSubmit, onSubmit, reset, errors } = useLogin()
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				id={'email'}
+				name='email'
+				label="email"
+				type='text'
 				className="m-4 p-[0.5rem] border-1 font-medium text-black"
-				register={register}
-				placeholder='Please enter Username'
-				
+				register={register} // Pass the register function from react-hook-form
+				placeholder='Enter email'
+				defaultValue=""
 			/>
-			{errors.email && <p className=" text-red-500">First name is required</p>}
-
+			{errors.email && <p className=" text-red-500">Email is required</p>}
 			<Input
 				id={'password'}
+				name='password'
+				label='password'
+				type='password'
 				register={register}
 				className="m-4 p-[0.5rem] border-1 font-medium text-black"
-				placeholder='Please enter Password'
+				placeholder='Enter password'
+				defaultValue=""
 			/>
-			<button type="submit">submit</button>
+			<button type="submit">Login</button>
 		</form>
 	)
 }
