@@ -2,7 +2,7 @@ import { useUserContext } from '@/contexts'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
-interface ILoginForm {
+export interface ILoginForm {
 	email: string
 	password: string
 }
@@ -11,6 +11,7 @@ export const useLogin = () => {
 	const [state, api] = useUserContext()
 	const {
 		register,
+		reset,
 		handleSubmit,
 		watch,
 		formState: { errors },
@@ -27,6 +28,7 @@ export const useLogin = () => {
 	return {
 		onSubmit,
 		register,
+		reset,
 		handleSubmit,
 		errors,
 	}

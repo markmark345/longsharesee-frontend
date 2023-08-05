@@ -1,17 +1,22 @@
+import { useInput } from '@/hooks/components/useInput';
 import classnames from 'classnames'
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useEffect } from 'react'
+import { UseFormRegister} from 'react-hook-form';
 
-export interface IInput {
-	id: string
+export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
+	id: string,
+	name: string,
 	placeholder?: string
 	className?: string
 	type?: string
 	disabled?: boolean
 	readOnly?: boolean
-	prefix?: boolean
-	suffix?: boolean
+	hasPrefix?: boolean
+	hasSuffix?: boolean
 	classes?: object
 	label?: ReactNode
+	defaultValue?: string;
+	register: UseFormRegister<any>
 	onChange?: (...event: any[]) => void
 	onBlur?: (...event: any[]) => void
 }
@@ -19,30 +24,41 @@ export interface IInput {
 const Input: FC<IInput> = (props) => {
 	const {
 		id,
+		name,
 		placeholder,
 		type,
 		disabled,
 		readOnly,
-		prefix,
-		suffix,
+		hasPrefix,
+		hasSuffix,
 		className: classNameProps,
+		defaultValue,
+		register,
 		...otherProps
 	} = props
 
-	console.log(disabled)
+	const { value, onChange } = useInput({defaultValue});
+
+	useEffect(() => {
+		register(id, { value: value });
+	}, [id, value, register]);
+
 	return (
 		<input
-			placeholder={placeholder ? placeholder : undefined}
+			id={id}
 			type={type}
-			disabled={disabled}
-			readOnly={readOnly}
+			placeholder={placeholder ? placeholder : undefined}
+			value={value}
 			className={classnames(
 				classNameProps,
 				`focus:ring-opacity-1 rounded-md border border-black-20 p-[0.3rem] hover:border-blue-primary focus:outline-none focus:ring-1 focus:ring-blue-primary `,
 			)}
-			
+			{...register(id, { required: true })}
+			name={name}
+			onChange={onChange}
 			{...otherProps}
 		/>
+		
 	)
 }
 

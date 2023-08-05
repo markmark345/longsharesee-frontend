@@ -51,8 +51,8 @@ export const UserContextProvider: FC<IUserContextProvider> = (props) => {
 
 	const logIn = useCallback(
 		async (payload: { email: string; password: string }) => {
-			// console.log('ssss', payload.email)
 			setCookie('email', payload.email, true)
+			window.location.href = '/account'
 		},
 		[],
 	)
