@@ -31,7 +31,7 @@ const Button: FC<IButton> = (props) => {
 					variant === 'light' || variant === 'ghost'
 						? ' text-black'
 						: ' text-white bg-deepSea-10'
-				} rounded hover:opacity-50 `,
+				} rounded opacity-100 hover:opacity-50 !transition-opacity duration-500`,
 			)}
 			variant={variant}
 			startContent={prefixContent}
