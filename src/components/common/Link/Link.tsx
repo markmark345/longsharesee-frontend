@@ -1,4 +1,3 @@
-// import { LinkProps } from '@nextui-org/react'
 import classnames from 'classnames'
 import NextLink, { LinkProps } from 'next/link'
 import { FC } from 'react'

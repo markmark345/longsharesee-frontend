@@ -2,6 +2,7 @@
 
 import { UserContextProvider } from '@/contexts'
 import { NextUIProvider } from '@nextui-org/react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { FC } from 'react'
 
 interface IContextProvider {
@@ -14,7 +15,9 @@ const ContextProvider: FC<IContextProvider> = ({ children }) => {
 	return contextProviders.reduceRight((memo, Provider) => {
 		return (
 			<Provider>
-				<NextUIProvider>{memo}</NextUIProvider>
+				<NextUIProvider>
+					<NextThemesProvider attribute="class">{memo}</NextThemesProvider>
+				</NextUIProvider>
 			</Provider>
 		)
 	}, children)
